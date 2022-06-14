@@ -29,7 +29,8 @@ def data_view():
                            file_name='twitter-data.csv',
                            mime='text/csv')
     with colb:
-        line_twitter_data = twitter_data.value_counts(subset='date', sort=False). \
+        line_twitter_data = twitter_data.value_counts(subset='date',
+                                                      sort=False).\
             rename_axis('date').reset_index(name='count')
         twitter_line_graph = px.line(line_twitter_data,
                                      x='date',
@@ -76,7 +77,10 @@ def data_view():
     with col5:
         line_data = misinfo_klip.value_counts(subset='date', sort=False).\
             rename_axis('date').reset_index(name='count')
-        line_graph = px.line(line_data, x='date', y='count', title='COVID-19 Misinformation Tweet Count per Day')
+        line_graph = px.line(line_data,
+                             x='date',
+                             y='count',
+                             title='COVID-19 Misinformation Tweet Count per Day')
 
         st.plotly_chart(line_graph)
 

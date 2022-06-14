@@ -8,6 +8,19 @@ if __name__ == '__main__':
 
     st.title('COVID-19 Misinformation Tweets: Identification and Analysis')
 
+    pandemic_text = '''
+                    The COVID-19 pandemic started after the first casualty outside China, 
+                    in the Philippines, and inflicted a lasting impact on the lives of many people. 
+                    COVID-19 or Coronavirus disease is caused by the newfound coronavirus, 
+                    SARS-CoV-2 virus, that is transmissible through saliva droplets or nose discharge.
+                    '''
+
+    infodemic_text = '''
+                     With the pandemic, an "infodemic" or information outbreak has started and 
+                     it contains both true and false information according to the 
+                     World Health Organization.
+                     '''
+
     col1, col2, col3 = st.columns(3)
     with col1:
         image = Image.open('data-res/files-needed/sars-cov-2.png')
@@ -17,17 +30,13 @@ if __name__ == '__main__':
     with col2:
         st.subheader('The Pandemic')
         st.markdown('''
-                    <p>The COVID-19 pandemic started after the first casualty outside China, in the Philippines, 
-                    and inflicted a lasting impact on the lives of many people. COVID-19 or Coronavirus disease 
-                    is caused by the newfound coronavirus, SARS-CoV-2 virus, that is transmissible through saliva 
-                    droplets or nose discharge.</p>
-                    ''',
+                    <p>{text}</p>
+                    '''.format(text=pandemic_text),
                     unsafe_allow_html=True)
         st.subheader('The Infodemic')
         st.markdown('''
-                    <p>With the pandemic, an "infodemic" or information outbreak has started and it contains both true 
-                    and false information according to the World Health Organization.</p>
-                    ''',
+                    <p>{text}</p>
+                    '''.format(text=infodemic_text),
                     unsafe_allow_html=True)
 
     with col3:

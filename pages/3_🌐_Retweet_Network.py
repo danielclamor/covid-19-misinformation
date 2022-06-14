@@ -61,7 +61,7 @@ def sna_view():
                         adj_edges.append((from_node, to_node))
                 pbar.update(1)
 
-        nodes = [Node(id=i, label=str(i), size=200) for i in G.nodes]
+        nodes = [Node(id=i, label=str(i), size=400) for i in G.nodes]
         edges = [Edge(source=i, target=j) for (i, j) in G.edges
                  if i in G.nodes and j in G.nodes]
 
@@ -86,15 +86,17 @@ def sna_view():
         with col2:
             with st.expander('Out-degree'):
                 out_degree_df = pd.DataFrame(G.out_degree,
-                                             columns=['node', 'out_degree']).sort_values(by=['out_degree'],
-                                                                                         ascending=False)
+                                             columns=['node',
+                                                      'out_degree']).sort_values(by=['out_degree'],
+                                                                                 ascending=False)
                 st.dataframe(out_degree_df)
 
         with col3:
             with st.expander('In-degree'):
                 in_degree_df = pd.DataFrame(G.in_degree,
-                                            columns=['node', 'in_degree']).sort_values(by=['in_degree'],
-                                                                                       ascending=False)
+                                            columns=['node',
+                                                     'in_degree']).sort_values(by=['in_degree'],
+                                                                               ascending=False)
                 st.dataframe(in_degree_df)
 
         col4, col5 = st.columns(2)

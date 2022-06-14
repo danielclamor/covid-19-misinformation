@@ -31,9 +31,6 @@ def btm_view():
         st.markdown('Labeled topic models')
         st.dataframe(topic_models_labels.set_index('topic'))
 
-    # st.write(get_bow(topic_models_labels['topic_model'].iloc[0].split(', '),
-    # tweets_topics.query('topic == 1')['tweet']))
-
     col3, col4 = st.columns(2)
     with col3:
         st.markdown('Tweets and corresponding topic')
@@ -44,7 +41,9 @@ def btm_view():
         labels = topic_models_labels['label'].tolist()
         topic_count = tweets_topics['topic'].value_counts(sort=False).tolist()
 
-        pie_data = pd.DataFrame({'Topic': topics, 'Label': labels, 'Tweet Count': topic_count})
+        pie_data = pd.DataFrame({'Topic': topics,
+                                 'Label': labels,
+                                 'Tweet Count': topic_count})
         pie_graph = px.pie(pie_data,
                            values='Tweet Count',
                            names='Label',
@@ -60,15 +59,19 @@ def btm_view():
         narrative = st.selectbox('Choose a narrative',
                                  narrative_df['narrative'])
     with col6:
-        desc = narrative_df['description'].loc[narrative_df['narrative'] == narrative].values[0]
+        desc = narrative_df['description'].\
+            loc[narrative_df['narrative'] == narrative].values[0]
         st.text_area(narrative, value=desc)
 
     with col2:
         sb_display = ['Topic {}'.format(i) for i in topic_models_labels['topic']]
-        topic = st.selectbox('Topic Wordcloud', topic_models_labels['topic'], format_func=lambda x: sb_display[x-1])
+        topic = st.selectbox('Topic Wordcloud',
+                             topic_models_labels['topic'],
+                             format_func=lambda x: sb_display[x-1])
         text = get_bow(tweets_topics.query('topic == {}'.format(topic))['clean'])
         wc = WordCloud(max_words=50).generate(text)
-        wc_graph, ax = plt.subplots(figsize=(20, 10), facecolor='k')
+        wc_graph, ax = plt.subplots(figsize=(20, 10),
+                                    facecolor='k')
         plt.imshow(wc, interpolation='bilinear')
         plt.axis('off')
         plt.tight_layout(pad=0)
